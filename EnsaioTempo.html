@@ -2,8 +2,7 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <!-- Corrigido viewport: sem espaço e com user-scalable=no -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable= no">
     <title>Página Romântica</title>
     <style>
         body {
@@ -12,7 +11,6 @@
             padding: 0;
             background-color: #fff0f6;
             overflow-x: hidden;
-            touch-action: manipulation; /* evita pinch zoom em alguns navegadores */
         }
 
         /* Telas */
@@ -21,7 +19,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100svh; /* altura da viewport segura */
+            height: 100vh;
             opacity: 1;
             transition: opacity 0.8s ease;
         }
@@ -30,40 +28,38 @@
             display: none;
             opacity: 0;
             position: relative;
-            padding: 10px;
+           
         }
 
         /* Botão inicial */
         button {
-            font-size: clamp(16px, 4vw, 22px);
-            padding: clamp(8px,2vw,14px) clamp(14px,4vw,24px);
+            font-size: 20px;
+            padding: 10px 20px;
             border: none;
             background-color: #ff4d6d;
             color: white;
             cursor: pointer;
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
         }
         .heart {
-            font-size: clamp(18px,4vw,26px);
-            margin-left: 8px;
+            font-size: 22px;
+            margin-left: 10px;
             color: red;
         }
-        button:hover { background-color: #e03a57; }
+        button:hover {
+            background-color: #e03a57;
+        }
 
         h1 {
             color: #ff4d6d;
-            font-size: clamp(20px,5vw,28px);
-            margin-top: 10px;
-            text-align: center;
         }
 
-        /* Slideshow responsivo */
+        /* Moldura do slideshow */
         .slideshow {
-            width: 90vw;
-            max-width: 450px;
-            height: 60vh;
+            width: 300px;
+            height: 400px;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             overflow: hidden;
@@ -80,49 +76,59 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
-        .slideshow img.active { opacity: 1; }
+        .slideshow img.active {
+            opacity: 1;
+        }
 
-        /* Player música canto superior esquerdo */
-        .player-musica {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            display: flex;
-            align-items: center;
-            background-color: rgba(255,255,255,0.85);
-            padding: 5px 8px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            max-width: 90vw;
-        }
-        .capa-musica {
-            width: 40px; height: 40px;
-            border-radius: 6px;
-            object-fit: cover;
-            margin-right: 10px;
-        }
-        .info-musica { display: flex; flex-direction: column; font-size: clamp(12px,3vw,16px); }
-        .info-musica strong { color: #ff4d6d; font-size: clamp(12px,3.5vw,16px); }
-        .info-musica span { color: #666; font-size: clamp(11px,3vw,14px); }
-        .music-icon { font-size: 22px; cursor: pointer; }
+       .player-musica {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.capa-musica {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.info-musica {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.info-musica strong {
+    font-size: 14px;
+    color: #ff4d6d;
+}
+
+.info-musica span {
+    font-size: 12px;
+    color: #666;
+}
 
         /* Texto e contador */
         p {
-            font-size: clamp(14px,4vw,18px);
-            margin-top: 15px;
-            padding: 0 10px;
-            text-align: center;
-        }
-        h1{
-            font-size: clamp(20px,5vw,28px);
+            font-size: 18px;
+            margin-top: 20px;
+            padding: 0 20px;
+            max-width: 500px;
             text-align: center;
         }
         .contador {
             margin-top: 15px;
-            font-size: clamp(16px,4vw,22px);
+            font-size: 20px;
             color: #e03a57;
             font-weight: bold;
-            text-align: center;
         }
 
         /* Corações caindo */
@@ -132,107 +138,123 @@
             color: red;
             font-size: 20px;
             animation: cair linear forwards;
-            pointer-events: none;
         }
         @keyframes cair {
             0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(100svh); opacity: 0; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-<div id="tela1">
-    <button onclick="mostrarTela2()">Clique aqui <span class="heart">❤️</span></button>
-</div>
-
-<div id="tela2">
-    <!-- Slideshow -->
-    <div class="slideshow">
-        <img src="Foto1.jpg" class="active" alt="Foto 1">
-        <img src="Foto2.jpg" alt="Foto 2">
-        <img src="Foto3.jpg" alt="Foto 3">
+    <!-- Tela Inicial -->
+    <div id="tela1">
+        <button onclick="mostrarTela2()">Clique aqui <span class="heart">❤️</span></button>
     </div>
 
-    <!-- Player Música -->
-    <div class="player-musica">
-        <img src="Música.jpg" alt="Capa da música" class="capa-musica">
-        <div class="info-musica">
-            <strong>The Best Part</strong>
-            <span>Savy Henry</span>
-            <div class="music-icon" onclick="tocarMusica()">🎵</div>
+    <!-- Tela 2 -->
+    <div id="tela2">
+        
+
+        <!-- Slideshow -->
+        <div class="slideshow">
+            <img src="Foto1.jpg" class="active" alt="Foto 1">
+            <img src="Foto2.jpg" alt="Foto 2">
+            <img src="Foto3.jpg" alt="Foto 3">
         </div>
+
+        <!-- Música -->
+      <div class="player-musica">
+    <img src="Música.jpg" alt="Capa da música" class="capa-musica">
+    <div class="info-musica">
+        <strong>The Best Part</strong><br>
+        <span>Savy Henry</span>
+        <div class="music-icon" onclick="tocarMusica()">🎵</div>
     </div>
-    <audio id="musica" src="musica.mp3"></audio>
-
-    <p>Você é minha princesa e eu sempre vou te amar e cuidar de ti, onde quer que eu esteja.
-         Feliz dia dos namorados, tenho ao meu lado a melhor mulher do mundo ❤️❤️❤️</p>
-
-    <div class="contador" id="contador"></div>
 </div>
+<audio id="musica" src="musica.mp3"></audio>
+        <!-- Texto -->
+        <p>
+            Você é minha princesa e eu sempre vou te amar e cuidar de ti, onde que que eu esteja. Feliz dia dos namorados, teho ao meu lado a melhor mulher do mundo ❤️❤️❤️
+        </p>
 
-<script>
-function mostrarTela2() {
-    document.getElementById("tela1").style.opacity = 0;
-    setTimeout(() => {
-        document.getElementById("tela1").style.display = "none";
-        document.getElementById("tela2").style.display = "flex";
-        setTimeout(() => {
-            document.getElementById("tela2").style.opacity = 1;
-            iniciarSlideshow();
-            iniciarCoracoes();
-            iniciarContador();
-        }, 50);
-    }, 800);
-}
+        <!-- Contador de tempo juntos -->
+        <div class="contador" id="contador"></div>
+    </div>
 
-function tocarMusica() {
-    var audio = document.getElementById('musica');
-    if (audio.paused) { audio.play(); } else { audio.pause(); }
-}
+    <script>
+        function mostrarTela2() {
+            document.getElementById("tela1").style.opacity = 0;
+            setTimeout(() => {
+                document.getElementById("tela1").style.display = "none";
+                document.getElementById("tela2").style.display = "flex";
+                document.body.style.backgroundColor = "#fff8f0";
+                setTimeout(() => {
+                    document.getElementById("tela2").style.opacity = 1;
+                    iniciarSlideshow();
+                    iniciarCoracoes();
+                    iniciarContador();
+                }, 50);
+            }, 800);
+        }
 
-// Slideshow
-function iniciarSlideshow() {
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.slideshow img');
-    setInterval(() => {
-        slides[slideIndex].classList.remove('active');
-        slideIndex = (slideIndex + 1) % slides.length;
-        slides[slideIndex].classList.add('active');
-    }, 3000);
-}
+        function tocarMusica() {
+            var audio = document.getElementById('musica');
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
 
-// Corações caindo
-function iniciarCoracoes() {
-    setInterval(() => {
-        const coracao = document.createElement('div');
-        coracao.classList.add('coracao');
-        coracao.innerHTML = '❤️';
-        coracao.style.left = Math.random() * window.innerWidth + 'px';
-        coracao.style.fontSize = (Math.random() * 25 + 18) + 'px';
-        coracao.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        document.body.appendChild(coracao);
-        setTimeout(() => coracao.remove(), 6000);
-    }, 500);
-}
+        // Slideshow
+        function iniciarSlideshow() {
+            let slideIndex = 0;
+            const slides = document.querySelectorAll('.slideshow img');
+            setInterval(() => {
+                slides[slideIndex].classList.remove('active');
+                slideIndex = (slideIndex + 1) % slides.length;
+                slides[slideIndex].classList.add('active');
+            }, 3000);
+        }
 
-// Contador
-function iniciarContador() {
-    const dataInicio = new Date("2023-05-20T00:00:00");
-    const contadorEl = document.getElementById("contador");
-    function atualizarContador() {
-        const agora = new Date();
-        const diff = agora - dataInicio;
-        const dias = Math.floor(diff / (1000*60*60*24));
-        const horas = Math.floor((diff / (1000*60*60)) % 24);
-        const minutos = Math.floor((diff / (1000*60)) % 60);
-        const segundos = Math.floor((diff / 1000) % 60);
-        contadorEl.textContent = `Juntos há ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos ❤️`;
-    }
-    atualizarContador();
-    setInterval(atualizarContador, 1000);
-}
-</script>
+        // Corações caindo
+        function iniciarCoracoes() {
+            setInterval(() => {
+                const coracao = document.createElement('div');
+                coracao.classList.add('coracao');
+                coracao.innerHTML = '❤️';
+                coracao.style.left = Math.random() * window.innerWidth + 'px';
+                coracao.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                coracao.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(coracao);
+                setTimeout(() => {
+                    coracao.remove();
+                }, 5000);
+            }, 500);
+        }
+
+        // Contador de tempo juntos
+        function iniciarContador() {
+            const dataInicio = new Date("2023-05-20T00:00:00"); // Coloque a data que vocês começaram
+            const contadorEl = document.getElementById("contador");
+
+            function atualizarContador() {
+                const agora = new Date();
+                const diff = agora - dataInicio;
+
+                const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutos = Math.floor((diff / (1000 * 60)) % 60);
+                const segundos = Math.floor((diff / 1000) % 60);
+
+                contadorEl.textContent = `Juntos há ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos ❤️`;
+            }
+
+            atualizarContador();
+            setInterval(atualizarContador, 1000);
+        }
+    </script>
 
 </body>
 </html>
